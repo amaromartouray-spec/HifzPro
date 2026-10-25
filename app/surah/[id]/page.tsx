@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 'use client';
 import { useEffect, useState, use } from 'react';
 import { getVerses, getTranslations, getRecitations } from '../../../lib/quran';
@@ -18,7 +20,7 @@ export default function SurahPage({ params }: { params: Promise<{ id: string }> 
   
   const [showTranslation, setShowTranslation] = useState(true);
   const [hideText, setHideText] = useState(false);
-  const [enableEcho, setEnableEcho] = useState(true); // NEW STATE
+  const [enableEcho, setEnableEcho] = useState(true);
   
   const [currentReciter, setCurrentReciter] = useState(7);
   const [currentTranslation, setCurrentTranslation] = useState(131);
@@ -78,7 +80,7 @@ export default function SurahPage({ params }: { params: Promise<{ id: string }> 
         <div className="max-w-6xl mx-auto px-4 py-4 flex flex-wrap justify-between items-center gap-4">
           <Link href="/" className="flex items-center gap-2 group">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 flex items-center justify-center text-white font-bold shadow-lg">Q</div>
-            <h1 className="text-xl font-bold text-white tracking-wide">Quran Reciter</h1>
+            <h1 className="text-xl font-bold text-white tracking-wide">HifzPro</h1>
           </Link>
           
           <div className="flex flex-wrap gap-3 items-center">
@@ -95,7 +97,6 @@ export default function SurahPage({ params }: { params: Promise<{ id: string }> 
 
       <main className="max-w-6xl mx-auto p-4 md:p-8 relative z-10">
         
-        {/* Controls */}
         <div className="flex flex-wrap gap-3 mb-8">
           <button onClick={() => setShowTranslation(!showTranslation)} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${showTranslation ? 'bg-emerald-600 text-white shadow-lg' : 'bg-slate-800 text-slate-400'}`}>Translation</button>
           
@@ -103,7 +104,6 @@ export default function SurahPage({ params }: { params: Promise<{ id: string }> 
             {hideText ? 'Show Arabic' : 'Hifz Mode'}
           </button>
 
-          {/* ECHO TOGGLE */}
           <button onClick={() => setEnableEcho(!enableEcho)} className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all flex items-center gap-2 ${enableEcho ? 'bg-indigo-600 text-white shadow-lg' : 'bg-slate-800 text-slate-400'}`}>
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"></path></svg>
             Masjid Echo: {enableEcho ? 'ON' : 'OFF'}
@@ -141,7 +141,6 @@ export default function SurahPage({ params }: { params: Promise<{ id: string }> 
                 ) : (
                   <div className="min-h-[100px] mb-10 flex flex-col items-center justify-center border-2 border-dashed border-slate-600 rounded-2xl bg-slate-800/20 p-4">
                     <p className="text-slate-500 font-medium italic mb-4">Arabic Hidden - Testing Memory</p>
-                    {/* Word by word translation for Hifz Mode */}
                     <div className="flex flex-wrap justify-center gap-2">
                       {verse.words?.filter((w: any) => w.char_type_name === 'word').map((w: any, i: number) => (
                          <span key={i} className="bg-slate-700/50 text-slate-300 px-2 py-1 rounded text-sm border border-slate-600">{w.translation?.text}</span>
@@ -169,7 +168,7 @@ export default function SurahPage({ params }: { params: Promise<{ id: string }> 
                     <Recorder 
                       surahNumber={surahId} 
                       ayahNumber={verse.verse_number} 
-                      enableEcho={enableEcho} // Pass the toggle state
+                      enableEcho={enableEcho}
                       onRecordingComplete={(blob, url) => handleRecordingComplete(verse.verse_number, url)} 
                     />
                     <div className="mt-4"><AIEvaluator expectedText={verse.text_uthmani} /></div>
