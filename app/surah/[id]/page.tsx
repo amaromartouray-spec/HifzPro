@@ -1,5 +1,3 @@
-export const dynamic = 'force-dynamic';
-
 'use client';
 import { useEffect, useState, use } from 'react';
 import { getVerses, getTranslations, getRecitations } from '../../../lib/quran';
